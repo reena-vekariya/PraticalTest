@@ -1,14 +1,16 @@
 import React,{} from "react";
-import {View, TouchableOpacity, FlatList, SafeAreaView, StyleSheet, Image, Text} from "react-native";
+import {View, TouchableOpacity, FlatList, StyleSheet, Text} from "react-native";
 import StyleConfig from "../common/StyleConfig";
 import Header from "../components/Header";
 import Feather from "react-native-vector-icons/Feather";
+import LocalStorage from "../common/LocalStorage";
 
 export default function DeviceSettings({navigation}) {
     const listItems = [{id: 1, title: "PRINTERS AND CASH DRAWER", iconName: "printer"}, {id: 2, title: "CARD READER", iconName: "credit-card"},
         {id: 3, title: "FUNCTIONALITIES SETTINGS", iconName: "settings"}];
 
-        const onPressItem = (item) => {
+        const onPressItem = async(item) => {
+            let data = await LocalStorage.getLocalData("functionalityData");
             switch(item?.id) {
                 case 1:
                     // navigation.navigate("");
@@ -17,7 +19,10 @@ export default function DeviceSettings({navigation}) {
                     // navigation.navigate("");
                     break;
                 case 3:
-                    navigation.navigate("");
+                    if(data === null || data === undefined || data === "") {
+                        await LocalStorage.setLocalData("functionalityData", LocalStorage.SETTING_DATA);
+                    }
+                    await navigation.navigate("FunctionalitiesSettings");
                     break;
                 default:
                     break;
@@ -25,7 +30,7 @@ export default function DeviceSettings({navigation}) {
         }
 
     return(
-        <SafeAreaView style={styles.mainContainer}>
+        <View style={styles.mainContainer}>
             <View>
                 <Header title={"DEVICE SETTINGS"} isBack onBackPress={() => navigation.goBack()} />
                 <View style={{paddingHorizontal: StyleConfig.countPixelRatio(20), paddingTop: StyleConfig.countPixelRatio(15)}}>
@@ -46,14 +51,13 @@ export default function DeviceSettings({navigation}) {
                     />
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        padding: 20,
         alignItems: "center",
         backgroundColor: StyleConfig.COLOR.white
     },

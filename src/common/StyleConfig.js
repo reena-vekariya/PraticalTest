@@ -31,8 +31,8 @@ export default {
     responsiveHeight: (size) => size * heightPer,
     responsiveWidth: (size) => size * widthPer,
     COLOR: {
-        purple: "#4E00A2",
-        pink: "#E748FC",
+        purple: "#5924AB",
+        pink: "#F26DFF",
         green: "#6E884F",
         white: "#FFFFFF",
     }

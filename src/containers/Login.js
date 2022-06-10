@@ -19,7 +19,7 @@ export default function Login({navigation}) {
             alert("Please Enter Password");
         } else {
             let data = {userName: userName, password: password};
-            await AsyncStorage.setItem("userData", data);
+            await AsyncStorage.setItem("userData", JSON.stringify(data));
             await navigation.navigate("Pin");
         }
     }
@@ -48,7 +48,7 @@ export default function Login({navigation}) {
                                 ref={passwordRef}
                                 value={password}
                                 onChangeText={(val) => setPassword(val)}
-                                style={[styles.inputStyle,{width: StyleConfig.responsiveWidth(65)}]}
+                                style={[styles.inputStyle,{width: StyleConfig.responsiveWidth(66)}]}
                                 secureTextEntry={(isShow) ? false : true}
                                 returnKeyType={"done"}
                             />
@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     inputStyle: {
-        fontSize: StyleConfig.FONT.fontSizeParagraph
+        fontSize: StyleConfig.FONT.fontSizeParagraph,
+        width: StyleConfig.responsiveWidth(82),
     },
     showText: {
         fontSize: StyleConfig.FONT.fontSizeParagraph,

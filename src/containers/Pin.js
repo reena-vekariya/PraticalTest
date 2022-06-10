@@ -10,7 +10,7 @@ export default function Pin({navigation}) {
 
     return(
         <SafeAreaView style={styles.mainContainer}>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }} contentInset={{top: 0, bottom: 60}}>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{paddingTop: StyleConfig.countPixelRatio(40), paddingHorizontal: StyleConfig.countPixelRatio(20)}}>
                     <View style={styles.headerView}>
                         <AntDesign name={"arrowleft"} size={(StyleConfig.isTablet) ? 50 : 30} color={StyleConfig.COLOR.white} />
@@ -83,7 +83,6 @@ export default function Pin({navigation}) {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        paddingHorizontal: 20,
         backgroundColor: StyleConfig.COLOR.purple
     },
     headerView: {
